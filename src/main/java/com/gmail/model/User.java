@@ -19,7 +19,6 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Entity
-@Component
 @Table(name = "users")
 public class User extends BaseEntity {
     @Column(name = "bithday_date")
