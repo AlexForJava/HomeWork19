@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    public List<User> findUsersByName(String userName);
+    List<User> findUsersByName(String userName);
 
-    public List<User> findUsersByBirthdayDate(LocalDate birthdayDate);
+    List<User> findUsersByBirthdayDate(LocalDate birthdayDate);
 }

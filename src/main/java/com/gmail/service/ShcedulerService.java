@@ -17,12 +17,10 @@ import java.util.List;
 @Log4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ShcedulerService {
-    private static final String CRON = "*/10 * * * * *";
-
     private final UserService userService;
     private final EmailService emailService;
 
-    @Scheduled(cron = CRON)
+    @Scheduled(cron = "* * * * * *")
     public void sendMailToUsers() {
         LocalDate localDate = LocalDate.now();
         List<User> users = userService.getByBirthdayDate(localDate);
