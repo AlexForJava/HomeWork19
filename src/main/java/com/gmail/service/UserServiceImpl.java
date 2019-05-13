@@ -1,5 +1,6 @@
 package com.gmail.service;
 
+import com.gmail.exceptions.UserNotFoundException;
 import com.gmail.model.User;
 import com.gmail.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +26,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getById(Long id) {
-        return userRepository.findById(id).orElse(new User());
+    public User getById(Long id) throws UserNotFoundException {
+        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
     @Override

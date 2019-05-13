@@ -1,5 +1,6 @@
 package com.gmail.service;
 
+import com.gmail.exceptions.UserNotFoundException;
 import com.gmail.model.User;
 
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ import java.util.List;
 public interface UserService {
     void save(User user);
 
-    User getById(Long id);
+    User getById(Long id) throws UserNotFoundException;
 
     List<User> getByName(String name);
 
