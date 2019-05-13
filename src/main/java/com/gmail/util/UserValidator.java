@@ -13,9 +13,7 @@ import org.springframework.validation.Validator;
  * Created by Space on 09.05.2019.
  */
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserValidator implements Validator {
-    private final UserService userService;
 
     @Override
     public boolean supports(Class<?> aClass) {
