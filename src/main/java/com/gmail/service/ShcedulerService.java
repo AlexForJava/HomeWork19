@@ -20,7 +20,7 @@ public class ShcedulerService {
     private final UserService userService;
     private final EmailService emailService;
 
-    @Scheduled(cron = "* * * * * *")
+    @Scheduled(cron = "${cron}")
     public void sendMailToUsers() {
         LocalDate localDate = LocalDate.now();
         List<User> users = userService.getByBirthdayDate(localDate);
