@@ -4,7 +4,6 @@ import com.gmail.annotations.InjectRandomInt;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
@@ -19,6 +18,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Entity
+@Component
 @Table(name = "users")
 public class User extends BaseEntity {
     @Column(name = "bithday_date")

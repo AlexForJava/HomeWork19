@@ -1,8 +1,7 @@
 package com.gmail.service;
 
-import com.gmail.repository.UserRepository;
-import com.gmail.exceptions.UserNotFoundException;
 import com.gmail.model.User;
+import com.gmail.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;

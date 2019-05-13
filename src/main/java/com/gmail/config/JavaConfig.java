@@ -35,7 +35,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "com.gmail.repository")
-@PropertySource("classpath:config.properties")
+@PropertySource("config.properties")
 @ComponentScan(basePackages = "com.gmail")
 public class JavaConfig {
     @Autowired

@@ -4,7 +4,6 @@ import com.gmail.config.JavaConfig;
 import com.gmail.model.User;
 import junit.framework.TestCase;
 import org.junit.Before;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,22 +17,35 @@ public class UserServiceImplTest extends TestCase {
 
     private UserService userService;
     private DataSource dataSource;
-
+    private User user;
 
     @Before
     public void init() {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(JavaConfig.class);
         userService = applicationContext.getBean(UserServiceImpl.class);
-        System.out.println(userService);
         dataSource = applicationContext.getBean("dataSource", DataSource.class);
-        System.out.println(dataSource);
+        user = new User();
+        user.setName("Alex");
+        user.setEmail("my_email@gmail.com");
+        user.setBirthdayDate(LocalDate.now());
     }
 
     public void testSave() throws Exception {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        int before = jdbcTemplate.queryForObject(SQL_GET_COUNT, Integer.class);
+        userService.save(user);
+        int after = jdbcTemplate.queryForObject(SQL_GET_COUNT, Integer.class);
+        assertFalse(before == after);
     }
 
     public void testGetById() throws Exception {
-
+        User firstUser = userService.getById(2L);
+        assertNotNull(firstUser);
+        assertNotNull(firstUser.getBirthdayDate());
+        assertNotNull(firstUser.getName());
+        assertNotNull(firstUser.getRandom());
+        assertNotNull(firstUser.getEmail());
+        user = firstUser;
     }
 
     public void testGetByName() throws Exception {
@@ -59,16 +71,18 @@ public class UserServiceImplTest extends TestCase {
     }
 
     public void testDeleteUser() throws Exception {
-
-        //userService.deleteUser(user);
-
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        int before = jdbcTemplate.queryForObject(SQL_GET_COUNT, Integer.class);
+        userService.deleteUser(user);
+        int after = jdbcTemplate.queryForObject(SQL_GET_COUNT, Integer.class);
+        assertFalse(before == after);
     }
 
     public void testDeleteById() throws Exception {
-        /*JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         int before = jdbcTemplate.queryForObject(SQL_GET_COUNT, Integer.class);
-        userService.deleteById(1L);
+        userService.deleteById(7L);
         int after = jdbcTemplate.queryForObject(SQL_GET_COUNT, Integer.class);
-        assertFalse(before == after);*/
+        assertFalse(before == after);
     }
 }
